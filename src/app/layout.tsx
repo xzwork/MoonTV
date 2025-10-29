@@ -95,21 +95,21 @@ export default async function RootLayout({
           name='viewport'
           content='width=device-width, initial-scale=1.0, viewport-fit=cover'
         />
-        <script>
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?dcfa644e54cf43776aa1bebfc507d133";
-          var s = document.getElementsByTagName("script")[0]; 
-          s.parentNode.insertBefore(hm, s);
-        })();
-        </script>
         {/* 将配置序列化后直接写入脚本，浏览器端可通过 window.RUNTIME_CONFIG 获取 */}
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
         <script
           dangerouslySetInnerHTML={{
             __html: `window.RUNTIME_CONFIG = ${JSON.stringify(runtimeConfig)};`,
           }}
+        />
+        {/* 百度统计 */}
+        <Script id="baidu-hm-init" strategy="afterInteractive">
+          {`window._hmt = window._hmt || [];`}
+        </Script>
+        <Script
+          id="baidu-hm"
+          strategy="afterInteractive"
+          src="https://hm.baidu.com/hm.js?dcfa644e54cf43776aa1bebfc507d133"
         />
       </head>
       <body
