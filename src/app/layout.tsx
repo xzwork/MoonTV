@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import Script from "next/script"; 
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 
@@ -102,7 +103,7 @@ export default async function RootLayout({
             __html: `window.RUNTIME_CONFIG = ${JSON.stringify(runtimeConfig)};`,
           }}
         />
-        {/* 百度统计 */}
+        {/* 百度统计 —— 先确保全局 _hmt 存在，再加载 hm.js */}
         <Script id="baidu-hm-init" strategy="afterInteractive">
           {`window._hmt = window._hmt || [];`}
         </Script>
