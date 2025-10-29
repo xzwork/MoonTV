@@ -15,6 +15,31 @@ import { ThemeProvider } from '../components/ThemeProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="zh-CN">
+      <head>
+        {process.env.NODE_ENV === "production" && (
+          <>
+            <Script id="baidu-hm" strategy="afterInteractive">
+              {`
+                var _hmt = _hmt || [];
+                (function() {
+                  var hm = document.createElement("script");
+                  hm.src = "https://hm.baidu.com/hm.js?dcfa644e54cf43776aa1bebfc507d133";
+                  var s = document.getElementsByTagName("script")[0]; 
+                  s.parentNode.insertBefore(hm, s);
+                })();
+              `}
+            </Script>
+          </>
+        )}
+      </head>
+      <body>{children}</body>
+    </html>
+  );
+}
+
 // 动态生成 metadata，支持配置更新后的标题变化
 export async function generateMetadata(): Promise<Metadata> {
   let siteName = process.env.SITE_NAME || 'MoonTV';
